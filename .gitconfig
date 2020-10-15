@@ -1,6 +1,6 @@
 [user]
-	name = Dozer
-	email = mail@dozer.cc
+	name = masquee
+	email = okayanz@outlook.com
 [color]
 	status = auto
 	diff = auto
@@ -19,7 +19,7 @@
 [mergetool]
 	keepBackup = false
 [include]
-	path = ~/.gitconfig_local
+	path = ~/.gitconfig
 [includeIf "gitdir:~/Projects/narvii/"]
 	path = .gitconfig_narvii
 [includeIf "gitdir:~/Projects/trip/"]

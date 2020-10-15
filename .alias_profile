@@ -158,9 +158,9 @@ external-mount(){
 MOUNT_SOURCE_HOME=/Volumes/External
 
 MOUNT_TARGECTS=(
-    "/Users/dozer/.minikube"
-    "/Users/dozer/Library/Containers/com.docker.docker"
-    "/Users/dozer/Projects"
+    "/Users/zhongyuan/.minikube"
+    "/Users/zhongyuan/Library/Containers/com.docker.docker"
+    "/Users/zhongyuan/Projects"
 )
 
 for t in ${MOUNT_TARGECTS[@]}; do

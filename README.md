@@ -1,3 +1,3 @@
 ```
-cd ~ && git clone git@github.com:dozer47528/home-config.git .home-config && cd .home-config && ./setup
+cd ~ && git clone git@github.com:masquee/home-config.git .home-config && cd .home-config && ./setup
 ```
