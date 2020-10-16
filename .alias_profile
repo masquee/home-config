@@ -2,6 +2,8 @@
 
 # ===== Env =====
 
+export PROJECT_HOME=~/Projects
+
 if [[ "$PROJECT_HOME" == "" ]] then
     echo "Missing Environment Variable `PROJECT_HOME`"
 fi

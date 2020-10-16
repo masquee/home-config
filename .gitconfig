@@ -18,13 +18,6 @@
 	rebase = true
 [mergetool]
 	keepBackup = false
-[include]
-	path = ~/.gitconfig
-[includeIf "gitdir:~/Projects/narvii/"]
-	path = .gitconfig_narvii
 [includeIf "gitdir:~/Projects/trip/"]
-	path = .gitconfig_trip
-[url "git@git.dev.sh.ctripcorp.com:ctripgo"]
-	insteadOf = https://github.com/ctripcorp
-[url "git@git.dev.sh.ctripcorp.com:servicemesh"]
-	insteadOf = http://git.dev.sh.ctripcorp.com/servicemesh
+	path = ~/.gitconfig_trip
+
