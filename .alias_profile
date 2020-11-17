@@ -9,10 +9,8 @@ if [[ "$PROJECT_HOME" == "" ]] then
 fi
 
 # Golang
-if [[ "$PROJECT_HOME" != "" ]] then
-    export GOPATH="$HOME/go"
-    export PATH="$GOPATH/bin:$PATH"
-fi
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 
 # Istio
 if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] then
