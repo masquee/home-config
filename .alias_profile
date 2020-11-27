@@ -170,3 +170,5 @@ for t in ${MOUNT_TARGECTS[@]}; do
 done
 
 }
+
+alias minikube-docker="eval $(minikube -p minikube docker-env | head -n 4 | sed 's/export//g' | tr '\n' ' ') docker"
