@@ -62,7 +62,7 @@ ubuntu-minikube(){
     scp zhongyuan.trip:/home/zhongyuan/.minikube/profiles/minikube/client.crt ~/.kube/clusters/ubuntu-cert/client.crt
     scp zhongyuan.trip:/home/zhongyuan/.minikube/profiles/minikube/client.key ~/.kube/clusters/ubuntu-cert/client.key
     yq eval -i ".clusters[0].cluster.server = \"https://127.0.0.1:8443\"" ~/.kube/clusters/ubuntu
-    yq eval -i ".clusters[0].cluster.certificate-authority = \"$HOME/.kube/clusters/lsubuntu-cert/ca.crt\"" ~/.kube/clusters/ubuntu
+    yq eval -i ".clusters[0].cluster.certificate-authority = \"$HOME/.kube/clusters/ubuntu-cert/ca.crt\"" ~/.kube/clusters/ubuntu
     yq eval -i ".users[0].user.client-certificate = \"$HOME/.kube/clusters/ubuntu-cert/client.crt\"" ~/.kube/clusters/ubuntu
     yq eval -i ".users[0].user.client-key = \"$HOME/.kube/clusters/ubuntu-cert/client.key\"" ~/.kube/clusters/ubuntu
     cat ~/.kube/clusters/ubuntu | perl -pe 's/minikube/ubuntu/g' | tee ~/.kube/clusters/ubuntu > /dev/null
