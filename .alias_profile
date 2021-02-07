@@ -179,3 +179,28 @@ for t in ${MOUNT_TARGECTS[@]}; do
 done
 
 }
+
+set -o vi
+
+# Kubernetes
+
+pod-containers(){
+    kubectl get pods $1 -o jsonpath='{.spec.containers[*].name}'
+}
+
+pod-exec(){
+    pod=$1
+    container=$2
+    if test -z $container; then
+        containers=$(pod-containers $pod)
+        for container in $(echo $containers | sed "s/ / /g")
+        do
+            if test $container != "istio-proxy"; then
+                echo "chose container $container"
+                kubectl exec "$pod" -it -c "$container" -- /bin/bash
+            fi
+        done
+    else
+        kubectl exec "$pod" -it -c "$container" -- /bin/bash
+    fi
+}
