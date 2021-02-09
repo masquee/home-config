@@ -196,7 +196,7 @@ pod-exec(){
         for container in $(echo $containers | sed "s/ / /g")
         do
             if test $container != "istio-proxy"; then
-                echo "chose container $container"
+                echo "choose container $container"
                 kubectl exec "$pod" -it -c "$container" -- /bin/bash
             fi
         done
