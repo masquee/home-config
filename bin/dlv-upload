@@ -12,10 +12,12 @@ fi
 if [ ! -f "$DLV_PATH/dlv" ]; then
     cd $DLV_PATH
     echo 'start building dlv ...'
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/dlv
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -gcflags='all=-N -l' ./cmd/dlv
     chmod +x ./dlv
     cd $CURRENT_DIR
 fi
 
-kubectl cp "$DLV_PATH/dlv" $1:/tmp
+echo "uploading..."
+kubectl cp "$DLV_PATH/dlv" $1:/tmp -c $(pod-container $1)
+echo "done!"
 
