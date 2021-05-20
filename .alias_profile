@@ -2,9 +2,12 @@
 
 # ===== Env =====
 
-export PROJECT_HOME=~/Projects
+export PROJECT_HOME=$HOME/Projects
 
 export GITHUB_HOME=$HOME/github
+
+export CUSTOMIZE_BIN_PATH=$HOME/.home_config/bin
+export PATH="$PATH:$CUSTOMIZE_BIN_PATH"
 
 if [[ "$PROJECT_HOME" == "" ]] then
     echo "Missing Environment Variable `PROJECT_HOME`"
@@ -12,7 +15,7 @@ fi
 
 # Golang
 export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 # Istio
 if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] then
