@@ -43,3 +43,11 @@ vim +PluginInstall +qall
 # Change defaull shell
 echo "Input password for change default shell"
 chsh -s `which zsh`
+
+if [[ $('uname') == 'Linux' ]]; then
+    # homebrew should be installed
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    # setup fonts
+    cp -r fonts/*  ~/.local/share/fonts
+    fc-cache -fv
+fi

@@ -185,8 +185,6 @@ done
 
 }
 
-set -o vi
-
 # Kubernetes
 
 pod-containers(){

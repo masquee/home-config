@@ -6,13 +6,8 @@ export LANG=en_US.UTF-8
 plugins=(extract z git tmux git-extras kubectl minikube helm gitignore mvn bower gitfast github npm python pip docker bazel zsh-autosuggestions zsh-syntax-highlighting)
 
 if [[ $('uname') == 'Linux' ]]; then
-    # homebrew should be installed
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    # setup fonts
-    cp -r fonts/*  ~/.local/share/fonts
-    fc-cache -fv
 fi
-
 if [[ $('uname') == 'Darwin' ]]; then
     plugins+=(brew)
     export HOMEBREW_NO_AUTO_UPDATE=1
