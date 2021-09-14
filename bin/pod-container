@@ -24,7 +24,7 @@ while :; do
 done
 
 if [[ $PROXY_CONTAINER == "1" ]]; then
-    container=$(kubectl get pods $POD_NAME -o jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}' | grep istio-proxy)
+    container=$(kubectl get pods $POD_NAME -o jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}' | egrep '(istio-proxy)|(sidecar-istio-envoy))
 else
     container=$(kubectl get pods $POD_NAME -o jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}' | grep -v istio)
 fi
