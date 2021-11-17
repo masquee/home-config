@@ -13,7 +13,10 @@ if [[ $('uname') == 'Darwin' ]]; then
     alias java17='export JAVA_HOME=$JAVA_17_HOME'
 fi
 if [[ $('uname') == 'Linux' ]]; then
-if
+    export JAVA_8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    export JAVA_HOME=$JAVA_8_HOME
+    export PATH=$JAVA_HOME/bin:$PATH
+fi
 
 
 export SSLKEYLOGFILE=$HOME/tmp/sslkeylog.log
