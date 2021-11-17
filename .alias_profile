@@ -4,12 +4,17 @@ export PROJECT_HOME=$HOME/Projects
 export GITHUB_HOME=$HOME/github
 
 # JDK
-export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
-export JAVA_17_HOME=/usr/local/Cellar/openjdk/17/libexec/openjdk.jdk/Contents/Home
-export JAVA_HOME=$JAVA_8_HOME
-export PATH=$JAVA_HOME/bin:$PATH
-alias java8='export JAVA_HOME=$JAVA_8_HOME'
-alias java17='export JAVA_HOME=$JAVA_17_HOME'
+if [[ $('uname') == 'Darwin' ]]; then
+    export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
+    export JAVA_17_HOME=/usr/local/Cellar/openjdk/17/libexec/openjdk.jdk/Contents/Home
+    export JAVA_HOME=$JAVA_8_HOME
+    export PATH=$JAVA_HOME/bin:$PATH
+    alias java8='export JAVA_HOME=$JAVA_8_HOME'
+    alias java17='export JAVA_HOME=$JAVA_17_HOME'
+fi
+if [[ $('uname') == 'Linux' ]]; then
+if
+
 
 export SSLKEYLOGFILE=$HOME/tmp/sslkeylog.log
 
