@@ -7,6 +7,8 @@ plugins=(extract z git tmux git-extras kubectl minikube helm gitignore mvn bower
 
 if [[ $('uname') == 'Linux' ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    alias idea='nohup ~/jetbrains/idea/bin/idea.sh &'
+    alias goland='nohup ~/jetbrains/goland/bin/goland.sh &'
 fi
 if [[ $('uname') == 'Darwin' ]]; then
     plugins+=(brew)
