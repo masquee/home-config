@@ -22,4 +22,12 @@
 	path = ~/.gitconfig_trip
 [url "git@git.dev.sh.ctripcorp.com:ctripgo"]
 	insteadOf = https://github.com/ctripcorp
+[url "git@git.dev.sh.ctripcorp.com:servicemesh"]
+	insteadOf = http://git.dev.sh.ctripcorp.com/servicemesh
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
