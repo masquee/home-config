@@ -19,6 +19,7 @@ if [[ $('uname') == 'Darwin' ]]; then
     alias ws="open -a '/Applications/WebStorm.app'"
     alias clion="open -a '/Applications/CLion.app'"
     alias vs="open -a '/Applications/Visual Studio Code.app'"
+    alias chrome="open -a 'Google Chrome'"
 fi
 
 export DISABLE_AUTO_UPDATE="true"
