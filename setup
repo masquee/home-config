@@ -52,5 +52,5 @@ if [[ $('uname') == 'Linux' ]]; then
     fc-cache -fv
 fi
 
-go env -w GOPROXY=goproxy.release.ctripcorp.com,https://goproxy.cn,direct
+go env -w GOPROXY=http://goproxy.release.ctripcorp.com,https://goproxy.cn,direct
 
