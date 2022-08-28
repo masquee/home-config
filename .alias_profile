@@ -5,12 +5,18 @@ export GITHUB_HOME=$HOME/github
 
 # JDK
 if [[ $('uname') == 'Darwin' ]]; then
-    export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home
-    export JAVA_17_HOME=/usr/local/Cellar/openjdk@17/17.0.3/libexec/openjdk.jdk/Contents/Home
-    export JAVA_HOME=$JAVA_8_HOME
-    export PATH=$JAVA_HOME/bin:$PATH
-    alias java8='export JAVA_HOME=$JAVA_8_HOME'
-    alias java17='export JAVA_HOME=$JAVA_17_HOME'
+    if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
+        export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
+        export JAVA_HOME=$JAVA_17_HOME
+        export PATH=$JAVA_HOME/bin:$PATH
+    else
+        export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home
+        export JAVA_17_HOME=/usr/local/Cellar/openjdk@17/17.0.3/libexec/openjdk.jdk/Contents/Home
+        export JAVA_HOME=$JAVA_8_HOME
+        export PATH=$JAVA_HOME/bin:$PATH
+        alias java8='export JAVA_HOME=$JAVA_8_HOME'
+        alias java17='export JAVA_HOME=$JAVA_17_HOME'
+    fi
 fi
 if [[ $('uname') == 'Linux' ]]; then
     export JAVA_8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
