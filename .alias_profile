@@ -27,7 +27,7 @@ fi
 
 export SSLKEYLOGFILE=$HOME/tmp/sslkeylog.log
 
-export CUSTOMIZE_BIN_PATH=$HOME/.home_config/bin
+export CUSTOMIZE_BIN_PATH=$GITHUB_HOME/masquee/home-config/bin
 export PATH="$PATH:$CUSTOMIZE_BIN_PATH"
 
 if [[ "$PROJECT_HOME" == "" ]] then
