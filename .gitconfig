@@ -26,3 +26,8 @@
 	insteadOf = http://git.dev.sh.ctripcorp.com/servicemesh
 [url "git@git.dev.sh.ctripcorp.com:framework"]
 	insteadOf = http://git.dev.sh.ctripcorp.com/framework
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
