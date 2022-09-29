@@ -9,6 +9,7 @@ if [[ $('uname') == 'Linux' ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     alias idea='nohup ~/jetbrains/idea/bin/idea.sh &'
     alias goland='nohup ~/jetbrains/goland/bin/goland.sh &'
+    alias clion='nohup ~/jetbrains/clion/bin/clion.sh &'
 fi
 if [[ $('uname') == 'Darwin' ]]; then
     plugins+=(brew)
