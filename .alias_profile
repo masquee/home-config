@@ -5,6 +5,7 @@ export GITHUB_HOME=$HOME/github
 
 # JDK
 if [[ $('uname') == 'Darwin' ]]; then
+    alias debugserver=/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/debugserver
     if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
         export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
         export JAVA_HOME=$JAVA_17_HOME
