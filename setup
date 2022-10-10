@@ -53,4 +53,5 @@ if [[ $('uname') == 'Linux' ]]; then
 fi
 
 go env -w GOPROXY=http://goproxy.release.ctripcorp.com,https://goproxy.cn,direct
+go env -w GOSUMDB=off
 

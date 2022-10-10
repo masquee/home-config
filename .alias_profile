@@ -3,7 +3,6 @@
 export PROJECT_HOME=$HOME/Projects
 export GITHUB_HOME=$HOME/github
 
-# JDK
 if [[ $('uname') == 'Darwin' ]]; then
     alias debugserver=/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/debugserver
     if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
