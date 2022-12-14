@@ -22,7 +22,7 @@ if [[ $('uname') == 'Darwin' ]]; then
     alias vs="open -a '/Applications/Visual Studio Code.app'"
     alias chrome="open -a 'Google Chrome'"
     export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
-    export SDKROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk"
+    export SDKROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
 fi
 
 export DISABLE_AUTO_UPDATE="true"
