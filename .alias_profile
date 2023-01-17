@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# eval "echo HOME: $(printenv HOME)"
+
 export PROJECT_HOME=$HOME/Projects
 export GITHUB_HOME=$HOME/github
+
+# eval "echo PROJECT_HOMEME: $(printenv PROJECT_HOME)"
+# eval "echo GITHUB_HOME: $(printenv GITHUB_HOME)"
 
 if [[ $('uname') == 'Darwin' ]]; then
     if [[ -d "/Applications/Xcode.app" ]]; then
@@ -9,9 +14,14 @@ if [[ $('uname') == 'Darwin' ]]; then
     fi
     export CONFIGS_INFRA_HOME=/Users/zhongyuan/Projects/trip/cloudnative/configs-infra/overlays
     if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
+         # Java HOME
         export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
         export JAVA_HOME=$JAVA_17_HOME
         export PATH=$JAVA_HOME/bin:$PATH
+
+        # Maven HOME
+        export MAVEN_HOME=/Users/zhongyuan/Projects/trip/maven-3.3.9
+        export PATH=$MAVEN_HOME/bin:$PATH
     else
         export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home
         export JAVA_17_HOME=/usr/local/Cellar/openjdk@17/17.0.3/libexec/openjdk.jdk/Contents/Home
