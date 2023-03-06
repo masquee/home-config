@@ -16,7 +16,8 @@ if [[ $('uname') == 'Darwin' ]]; then
     if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
          # Java HOME
         export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
-        export JAVA_HOME=$JAVA_17_HOME
+        export JAVA_11_HOME=/opt/homebrew/opt/openjdk@11
+        export JAVA_HOME=$JAVA_11_HOME
         export PATH=$JAVA_HOME/bin:$PATH
 
         # Maven HOME
