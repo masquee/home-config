@@ -8,12 +8,12 @@ export GITHUB_HOME=$HOME/github
 # eval "echo PROJECT_HOMEME: $(printenv PROJECT_HOME)"
 # eval "echo GITHUB_HOME: $(printenv GITHUB_HOME)"
 
-if [[ $('uname') == 'Darwin' ]]; then
+if [[ $(uname) == 'Darwin' ]]; then
     if [[ -d "/Applications/Xcode.app" ]]; then
         alias debugserver=/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/debugserver
     fi
     export CONFIGS_INFRA_HOME=/Users/zhongyuan/Projects/trip/cloudnative/configs-infra/overlays
-    if [[ $('hostname') == 'zhongyuan-mini.local' ]]; then
+    if [[ $(hostname) == 'zhongyuan-mini.local' ]]; then
          # Java HOME
         export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
         export JAVA_11_HOME=/opt/homebrew/opt/openjdk@11
@@ -52,7 +52,7 @@ if [[ "$PROJECT_HOME" == "" ]] then
     echo "Missing Environment Variable `PROJECT_HOME`"
 fi
 
-# Golang
+# Go
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
