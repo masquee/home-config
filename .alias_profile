@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# eval "echo HOME: $(printenv HOME)"
+# echo HOME: $(printenv HOME)
 
 export PROJECT_HOME=$HOME/Projects
 export GITHUB_HOME=$HOME/github
 
-# eval "echo PROJECT_HOMEME: $(printenv PROJECT_HOME)"
-# eval "echo GITHUB_HOME: $(printenv GITHUB_HOME)"
+# echo PROJECT_HOME: $(printenv PROJECT_HOME)
+# echo GITHUB_HOME: $(printenv GITHUB_HOME)
 
 if [[ $(uname) == 'Darwin' ]]; then
     if [[ -d "/Applications/Xcode.app" ]]; then
@@ -14,7 +14,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     fi
     export CONFIGS_INFRA_HOME=/Users/zhongyuan/Projects/trip/cloudnative/configs-infra/overlays
     if [[ $(hostname) == 'zhongyuan-mini.local' ]]; then
-         # Java HOME
+        # Java HOME
         export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home
         export JAVA_11_HOME=/opt/homebrew/opt/openjdk@11
         export JAVA_HOME=$JAVA_11_HOME
@@ -42,14 +42,13 @@ if [[ $('uname') == 'Linux' ]]; then
     export PATH=$JAVA_HOME/bin:$PATH
 fi
 
-
 export SSLKEYLOGFILE=$HOME/tmp/sslkeylog.log
 
 export CUSTOMIZE_BIN_PATH=$GITHUB_HOME/masquee/home-config/bin
 export PATH="$PATH:$CUSTOMIZE_BIN_PATH"
 
-if [[ "$PROJECT_HOME" == "" ]] then
-    echo "Missing Environment Variable `PROJECT_HOME`"
+if [[ "$PROJECT_HOME" == "" ]]; then
+    echo "Missing Environment Variable $(PROJECT_HOME)"
 fi
 
 # Go
@@ -57,19 +56,18 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 # Istio
-if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] then
+if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]]; then
     export PATH=$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin:$PATH
     source $PROJECT_HOME/istio/istio-$ISTIO_VERSION/tools/_istioctl
 
-    if [[ ! -f "/tmp/istio-$ISTIO_VERSION.json" ]] then
-        istioctl profile dump demo -o json > /tmp/istio-$ISTIO_VERSION.json
+    if [[ ! -f "/tmp/istio-$ISTIO_VERSION.json" ]]; then
+        istioctl profile dump demo -o json >/tmp/istio-$ISTIO_VERSION.json
     fi
 fi
 
 # Kubernetes
 
 export PATH="$HOME/.krew/bin:$PATH"
-
 
 # ===== Misc =====
 
@@ -85,21 +83,20 @@ alias minikube="KUBECONFIG=$HOME/.kube/config minikube"
 
 # ===== Ubuntu =====
 
-
-ubuntu-enable-proxy(){
-    LAN_IP=$(ip addr show $(ip -4 route ls | grep default | awk '{print $5}') | grep 'inet ' |  perl -pe 's/(.*inet )(\d+\.\d+\.\d+\.\d+)(\/\d+.*)/$2/g')
+ubuntu-enable-proxy() {
+    LAN_IP=$(ip addr show $(ip -4 route ls | grep default | awk '{print $5}') | grep 'inet ' | perl -pe 's/(.*inet )(\d+\.\d+\.\d+\.\d+)(\/\d+.*)/$2/g')
     ssh zhongyuan.trip -- "cat /etc/resolv.conf | perl -pe 's/^nameserver.*/nameserver 198.18.0.2/g' | sudo tee /etc/resolv.conf"
     ssh zhongyuan.trip -- "sudo ip route add default via $LAN_IP"
 }
-ubuntu-disable-proxy(){
+ubuntu-disable-proxy() {
     ssh zhongyuan.trip -- "cat /etc/resolv.conf | perl -pe 's/^nameserver.*/nameserver 127.0.0.53/g' | sudo tee /etc/resolv.conf"
     ssh zhongyuan.trip -- "sudo ip route delete default"
 }
-ubuntu-reenable-proxy(){
+ubuntu-reenable-proxy() {
     ubuntu-disable-proxy && ubuntu-enable-proxy
 }
 # Forward desktop minikube
-ubuntu-minikube(){
+ubuntu-minikube() {
     scp zhongyuan.trip:/home/zhongyuan/.kube/config ~/.kube/clusters/ubuntu
     mkdir -p ~/.kube/clusters/ubuntu-cert
     scp zhongyuan.trip:/home/zhongyuan/.minikube/ca.crt ~/.kube/clusters/ubuntu-cert/ca.crt
@@ -109,7 +106,7 @@ ubuntu-minikube(){
     yq eval -i ".clusters[0].cluster.certificate-authority = \"$HOME/.kube/clusters/ubuntu-cert/ca.crt\"" ~/.kube/clusters/ubuntu
     yq eval -i ".users[0].user.client-certificate = \"$HOME/.kube/clusters/ubuntu-cert/client.crt\"" ~/.kube/clusters/ubuntu
     yq eval -i ".users[0].user.client-key = \"$HOME/.kube/clusters/ubuntu-cert/client.key\"" ~/.kube/clusters/ubuntu
-    cat ~/.kube/clusters/ubuntu | perl -pe 's/minikube/ubuntu/g' | tee ~/.kube/clusters/ubuntu > /dev/null
+    cat ~/.kube/clusters/ubuntu | perl -pe 's/minikube/ubuntu/g' | tee ~/.kube/clusters/ubuntu >/dev/null
     ssh -NT -L 127.0.0.1:8443:$(ssh zhongyuan.trip -- minikube ip):8443 zhongyuan.trip || true
     rm -rf $HOME/.kube/clusters/ubuntu
     rm -rf $HOME/.kube/clusters/ubuntu-cert
@@ -126,7 +123,7 @@ KUBE_CACHED_IMAGES=(
     golang:1.15,debug
 )
 
-if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] && [[ -x "$(command -v jq)" ]] then
+if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] && [[ -x "$(command -v jq)" ]]; then
     KUBE_CACHED_IMAGES+=(
         docker.io/istio/proxyv2:${ISTIO_VERSION},istio
         istio/proxyv2:${ISTIO_VERSION},istio
@@ -139,7 +136,7 @@ if [[ -d "$PROJECT_HOME/istio/istio-$ISTIO_VERSION/bin" ]] && [[ -x "$(command -
 fi
 
 # Load images to minikube, do not need to run it after create Minikube cluster everytime.
-minikube-cache-image(){
+minikube-cache-image() {
     minikube cache list | xargs minikube cache delete
     rm -rf ~/.minikube/cache/images/*
     for i in ${KUBE_CACHED_IMAGES[@]}; do
@@ -156,7 +153,7 @@ minikube-cache-image(){
 
 # Load host docker images to Kind on-demand, need to run it after create Kind cluster everytime.
 # You pass the group name to this command like: `kind-load-images nginx`
-kind-load-images(){
+kind-load-images() {
     for i in ${KUBE_CACHED_IMAGES[@]}; do
         image=$(echo $i | awk -F ',' '{print $1}')
         group=$(echo $i | awk -F ',' '{print $2}')
@@ -169,7 +166,7 @@ kind-load-images(){
 
 # Completions for `kind-load-images` command
 
-_kind-load-images_completions(){
+_kind-load-images_completions() {
     COMPREPLY+=("all")
     for i in ${KUBE_CACHED_IMAGES[@]}; do
         image=$(echo $i | awk -F ',' '{print $1}')
@@ -181,8 +178,7 @@ _kind-load-images_completions(){
 }
 complete -F _kind-load-images_completions kind-load-images
 
-
-pod-name(){
+pod-name() {
     kubectl get pod -l app=$1 -o jsonpath="{.items[0].metadata.name}"
 }
 
@@ -196,47 +192,45 @@ kk() {
     export KUBECONFIG=${HOME}/.tmp/${uuid}
 }
 
-_kk_completions(){
-   COMPREPLY+=("default")
-   COMPREPLY+=(`ls ~/.kube/clusters`)
+_kk_completions() {
+    COMPREPLY+=("default")
+    COMPREPLY+=($(ls ~/.kube/clusters))
 }
 
 complete -F _kk_completions kk
 
-
 # External Disk
 
-external-mount(){
+external-mount() {
 
-MOUNT_SOURCE_HOME=/Volumes/External
+    MOUNT_SOURCE_HOME=/Volumes/External
 
-MOUNT_TARGECTS=(
-    "/Users/zhongyuan/.minikube"
-    "/Users/zhongyuan/Library/Containers/com.docker.docker"
-    "/Users/zhongyuan/Projects"
-)
+    MOUNT_TARGECTS=(
+        "/Users/zhongyuan/.minikube"
+        "/Users/zhongyuan/Library/Containers/com.docker.docker"
+        "/Users/zhongyuan/Projects"
+    )
 
-for t in ${MOUNT_TARGECTS[@]}; do
-    mkdir -p "${MOUNT_SOURCE_HOME}${t}"
-    rm -r "${t}"
-    ln -s "${MOUNT_SOURCE_HOME}${t}" "${t}"
-done
+    for t in ${MOUNT_TARGECTS[@]}; do
+        mkdir -p "${MOUNT_SOURCE_HOME}${t}"
+        rm -r "${t}"
+        ln -s "${MOUNT_SOURCE_HOME}${t}" "${t}"
+    done
 
 }
 
 # Kubernetes
 
-pod-containers(){
+pod-containers() {
     kubectl get pods $1 -o jsonpath='{.spec.containers[*].name}'
 }
 
-pod-exec(){
+pod-exec() {
     pod=$1
     container=$2
     if test -z $container; then
         containers=$(pod-containers $pod)
-        for container in $(echo $containers | sed "s/ / /g")
-        do
+        for container in $(echo $containers | sed "s/ / /g"); do
             if test $container != "istio-proxy"; then
                 echo "choose container $container"
                 kubectl exec "$pod" -it -c "$container" -- /bin/bash
