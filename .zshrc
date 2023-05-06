@@ -12,6 +12,10 @@ if [[ $(uname) == 'Linux' ]]; then
     alias clion='nohup ~/jetbrains/clion/bin/clion.sh &'
 fi
 if [[ $(uname) == 'Darwin' ]]; then
+    if [[ $(hostname) == 'zhongyuan-mini.local' ]]; then
+        alias idea="open -a '/Applications/IntelliJ IDEA.app'"
+        alias goland="open -a '/Applications/Goland.app'"
+    fi
     plugins+=(brew)
     export HOMEBREW_NO_AUTO_UPDATE=1
     # alias idea="open -a '/Applications/IntelliJ IDEA.app'"
