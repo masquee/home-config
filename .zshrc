@@ -16,8 +16,8 @@ if [[ $(uname) == 'Darwin' ]]; then
     export HOMEBREW_NO_AUTO_UPDATE=1
     # alias idea="open -a '/Applications/IntelliJ IDEA.app'"
     # alias goland="open -a '/Applications/Goland.app'"
-    alias charm="open -a '/Applications/PyCharm.app'"
-    alias ws="open -a '/Applications/WebStorm.app'"
+    # alias charm="open -a '/Applications/PyCharm.app'"
+    # alias ws="open -a '/Applications/WebStorm.app'"
     # alias clion="open -a '/Applications/CLion.app'"
     alias vs="open -a '/Applications/Visual Studio Code.app'"
     alias chrome="open -a 'Google Chrome'"
