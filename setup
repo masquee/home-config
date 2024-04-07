@@ -51,7 +51,6 @@ if [[ $('uname') == 'Linux' ]]; then
     cp -r fonts/*  ~/.local/share/fonts
     fc-cache -fv
 fi
-
-go env -w GOPROXY=http://goproxy.release.ctripcorp.com,https://goproxy.cn,direct
-go env -w GOSUMDB=off
+# go env -w GOPROXY=http://goproxy.release.ctripcorp.com,https://goproxy.cn,direct
+# go env -w GOSUMDB=off
 
