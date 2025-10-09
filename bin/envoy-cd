@@ -1,3 +1,10 @@
 #!/bin/bash
 
-kx $1 -- curl http://localhost:15000/config_dump
+set -e
+request_url="http://localhost:15000/config_dump"
+# pass the second argument as query string
+# e.g. envoy-cd pod_name includer_eds
+if [ $# -eq 2 ]; then
+    request_url=${request_url}\?$2
+fi
+kx $1 -- curl $request_url
