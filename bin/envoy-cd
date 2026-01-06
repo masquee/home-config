@@ -7,4 +7,5 @@ request_url="http://localhost:15000/config_dump"
 if [ $# -eq 2 ]; then
     request_url=${request_url}\?$2
 fi
-kx $1 -- curl $request_url
+
+kubectl exec $1 -- curl -s $request_url
