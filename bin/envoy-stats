@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kx $1 -p -- curl http://localhost:15090/stats/prometheus?usedonly
+kubectl exec $1  -- curl -s http://localhost:15020/stats/prometheus?usedonly
