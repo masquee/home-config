@@ -1,0 +1,55 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: pod-info <pod-name> [kubectl options...]"
+}
+
+case "${1:-}" in
+    -h|--help)
+        usage
+        exit 0
+        ;;
+    "")
+        usage >&2
+        exit 1
+        ;;
+esac
+
+pod_name=$1
+shift
+
+# Fetch only the fields needed for display, in a single kubectl call.
+jsonpath='{"L\tmesh.trip.com/release-version\t"}{.metadata.labels.mesh\.trip\.com/release-version}{"\n"}'
+jsonpath+='{"L\tmesh.trip.com/sidecar-inject\t"}{.metadata.labels.mesh\.trip\.com/sidecar-inject}{"\n"}'
+jsonpath+='{"L\tmesh.trip.com/sidecarset\t"}{.metadata.labels.mesh\.trip\.com/sidecarset}{"\n"}'
+jsonpath+='{range .spec.containers[*]}{"I\t"}{.name}{"\t"}{.image}{"\n"}{end}'
+jsonpath+='{range .spec.initContainers[*]}{"I\t"}{.name}{" (init)\t"}{.image}{"\n"}{end}'
+jsonpath+='{range .spec.ephemeralContainers[*]}{"I\t"}{.name}{" (ephemeral)\t"}{.image}{"\n"}{end}'
+
+pod_data=$(kubectl get pod "$pod_name" "$@" -o "jsonpath=$jsonpath") || exit $?
+
+printf '%s\n' "$pod_data" | awk -F '\t' '
+    $1 == "L" || $1 == "I" {
+        count++
+        section[count] = $1
+        name[count] = $2
+        value[count] = ($3 == "" ? "<unset>" : $3)
+        if (length($2) > width[$1]) {
+            width[$1] = length($2)
+        }
+    }
+    END {
+        print "Labels"
+        for (i = 1; i <= count; i++) {
+            if (section[i] == "L") {
+                printf "  %-*s  %s\n", width["L"], name[i], value[i]
+            }
+        }
+        print "\nImages"
+        for (i = 1; i <= count; i++) {
+            if (section[i] == "I") {
+                printf "  %-*s  %s\n", width["I"], name[i], value[i]
+            }
+        }
+    }
+'
